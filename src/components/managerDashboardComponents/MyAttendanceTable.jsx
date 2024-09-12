@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Table } from "antd";
-import { checkIn } from "../../../../backend/src/controllers/attendance.controller";
+
 import { formatDate } from "../../utils/helperFunctions";
 
 function MyAttendanceTable({ attendances }) {
