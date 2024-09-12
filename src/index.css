@@ -1,0 +1,63 @@
+* {
+  font-family: "Times New Roman", Times, serif;
+}
+a {
+  text-decoration: none;
+}
+.gradient {
+  background: linear-gradient(to right, #90aead, #fbe9d0);
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  /* background-color: red; */
+}
+.sidebar {
+  color: #fff;
+  background-color: #874f41;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+  background: #874f41;
+}
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: #874f41;
+}
+.menu-bar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+
+  background-color: #874f41;
+}
+/* Custom CSS for the selected menu item */
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #fbe9d0 !important;
+  color: #874f41;
+}
+.ant-menu-dark .ant-menu-item-selected a {
+  color: #874f41 !important; /* Adjust the text color if needed */
+}
+.ant-icon {
+  /* height: 50px; */
+  font-size: 24px;
+  cursor: pointer;
+}
