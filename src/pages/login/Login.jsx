@@ -21,6 +21,7 @@ function Login() {
             <div className="form-container vh-100">
               <div className="card">
                 <div className="card-body vstack gap-3">
+                  <h2 className="card-title">Login</h2>
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
