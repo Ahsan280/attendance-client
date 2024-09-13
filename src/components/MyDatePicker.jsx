@@ -4,6 +4,7 @@ import { DatePicker, Space } from "antd";
 const MyDatePicker = ({ setDate }) => {
   const onChange = (date, dateString) => {
     setDate(() => {
+      console.log(new Date(date).toISOString());
       return new Date(date).toISOString();
     });
   };
