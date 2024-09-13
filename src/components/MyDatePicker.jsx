@@ -3,7 +3,9 @@ import { DatePicker, Space } from "antd";
 
 const MyDatePicker = ({ setDate }) => {
   const onChange = (date, dateString) => {
-    setDate(date);
+    setDate(() => {
+      return new Date(date).toISOString();
+    });
   };
   return (
     <Space direction="vertical">
