@@ -12,10 +12,10 @@ function ChechInButton({ setHasCheckedIn }) {
     setLoading(true);
     e.preventDefault();
     const date = new Date().toISOString();
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     console.log(date, timeZone);
-    await dispatch(checkInToday({ api, date, timeZone, setHasCheckedIn }));
+    await dispatch(checkInToday({ api, date, timezone, setHasCheckedIn }));
     setLoading(false);
   };
   return (
