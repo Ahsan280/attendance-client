@@ -14,8 +14,11 @@ export const fetchTodaysAttendance = createAsyncThunk(
 
 export const checkInToday = createAsyncThunk(
   "checkInToday",
-  async ({ api, date, setHasCheckedIn }) => {
-    const response = await api.post(`v1/attendance/check-in`, { date });
+  async ({ api, date, timezone, setHasCheckedIn }) => {
+    const response = await api.post(`v1/attendance/check-in`, {
+      date,
+      timezone,
+    });
     console.log(response.data.attendance);
     setHasCheckedIn(true);
     return response.data.attendance;
