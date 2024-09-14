@@ -14,7 +14,7 @@ function ChechInButton({ setHasCheckedIn }) {
     const date = new Date().toISOString();
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    console.log(date, timeZone);
+    console.log(date, timezone);
     await dispatch(checkInToday({ api, date, timezone, setHasCheckedIn }));
     setLoading(false);
   };
