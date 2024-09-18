@@ -75,12 +75,18 @@ function ManagerDashboard() {
           <h2>Today's Attendance</h2>
           {todaysAttendance ? (
             <>
-              <h2>Checked In: {formatDate(todaysAttendance.checkIn)}</h2>
-              <h2>Status: {todaysAttendance.status}</h2>
-              {todaysAttendance.checkOut && (
+              {!(todaysAttendance.status === "leave") && (
                 <>
-                  <h2>Checked Out: {formatDate(todaysAttendance.checkOut)}</h2>
-                  <h2>Hours Worked: {todaysAttendance.hoursWorked}</h2>
+                  <h2>Checked In: {formatDate(todaysAttendance.checkIn)}</h2>
+                  <h2>Status: {todaysAttendance.status}</h2>
+                  {todaysAttendance.checkOut && (
+                    <>
+                      <h2>
+                        Checked Out: {formatDate(todaysAttendance.checkOut)}
+                      </h2>
+                      <h2>Hours Worked: {todaysAttendance.hoursWorked}</h2>
+                    </>
+                  )}
                 </>
               )}
             </>
