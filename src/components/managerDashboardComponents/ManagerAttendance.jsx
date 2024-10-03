@@ -20,6 +20,7 @@ function ManagerAttendance() {
   useEffect(() => {
     const fetchAttendanceData = async () => {
       const response = await api.get(`v1/attendance/filter-by-date/${date}`);
+      console.log(response.data);
       let attendanceHash = {};
       response.data.forEach((attendance) => {
         attendanceHash[attendance.user] = attendance;

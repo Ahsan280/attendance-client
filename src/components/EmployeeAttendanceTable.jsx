@@ -54,7 +54,7 @@ function EmployeeAttendanceTable({ employees, getAttendanceDetails }) {
     },
   ];
   const dataSource = employees.map((employee) => {
-    const attendanceDetails = getAttendanceDetails(employee._id);
+    const attendanceDetails = getAttendanceDetails(employee.id);
     return {
       key: employee._id,
       fullName: employee.fullName,

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { deleteEmployee } from "../features/employee/employeeSlice";
 import Swal from "sweetalert2";
 import useAxios from "../utils/useAxios";
+import AssignShiftModal from "./managerDashboardComponents/AssignShiftModal";
 function EmployeeTable({ employees, getAttendanceDetails }) {
   const dispatch = useDispatch();
   const api = useAxios();
@@ -74,14 +75,15 @@ function EmployeeTable({ employees, getAttendanceDetails }) {
               handleDelete(e, employee);
             }}
           />
+          <AssignShiftModal employee={employee} />
         </div>
       ),
     },
   ];
   const dataSource = employees.map((employee) => {
-    const attendanceDetails = getAttendanceDetails(employee._id);
+    const attendanceDetails = getAttendanceDetails(employee.id);
     return {
-      key: employee._id,
+      key: employee.id,
       fullName: employee.fullName,
       phoneNumber: employee.phoneNumber,
 

@@ -7,21 +7,30 @@ export const fetchTodaysAttendance = createAsyncThunk(
     const response = await api.get(
       `v1/attendance/filter-by-date-user/${date}/${id}`
     );
-    console.log(response.data);
+
     return response.data;
   }
 );
 
 export const checkInToday = createAsyncThunk(
   "checkInToday",
-  async ({ api, date, timezone, setHasCheckedIn }) => {
-    const response = await api.post(`v1/attendance/check-in`, {
-      date,
-      timezone,
-    });
-    console.log(response.data.attendance);
-    setHasCheckedIn(true);
-    return response.data.attendance;
+  async (
+    { api, date, timezone, setHasCheckedIn, latitude, longitude },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await api.post(`v1/attendance/check-in`, {
+        date,
+        timezone,
+        latitude,
+        longitude,
+      });
+
+      setHasCheckedIn(true);
+      return response.data.attendance;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 export const checkOutToday = createAsyncThunk(
@@ -54,7 +63,7 @@ export const todaysAttendanceSlice = createSlice({
       .addCase(fetchTodaysAttendance.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log(action.error);
+
         Swal.fire({
           title: "Error",
           text: action.error.message,
@@ -71,10 +80,9 @@ export const todaysAttendanceSlice = createSlice({
         });
       })
       .addCase(checkInToday.rejected, (state, action) => {
-        console.log(action.error);
         Swal.fire({
           title: "Error",
-          text: action.error.message,
+          text: action.payload.error,
           icon: "error",
         });
       })

@@ -5,7 +5,8 @@ const useAxios = () => {
   const { setUser } = useAuthContext();
   const navigate = useNavigate();
   const axiosInstance = axios.create({
-    baseURL: "https://attendance-server-jrbe.onrender.com/api/",
+    // baseURL: "https://attendance-server-jrbe.onrender.com/api/",
+    baseURL: "http://localhost:8000/api/",
     withCredentials: true,
   });
   axiosInstance.interceptors.response.use(

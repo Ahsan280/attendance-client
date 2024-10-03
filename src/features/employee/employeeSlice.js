@@ -13,8 +13,8 @@ export const addEmployee = createAsyncThunk(
   "addEmployee",
   async ({ api, formData }) => {
     const response = await api.post("v1/users/register", formData);
-    console.log(response.data.createduser);
-    return response.data.createduser;
+    console.log(response.data.createdUser);
+    return response.data.createdUser;
   }
 );
 

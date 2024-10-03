@@ -20,6 +20,7 @@ function AllEmployees() {
     const fetchAttendanceData = async () => {
       const date = new Date().toISOString();
       const response = await api.get(`v1/attendance/filter-by-date/${date}`);
+
       let attendanceHash = {};
       response.data.forEach((attendance) => {
         attendanceHash[attendance.user] = attendance;
