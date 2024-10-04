@@ -8,6 +8,7 @@ import {
 import useAxios from "../../utils/useAxios";
 import Spinner from "../Spinner";
 function SingleLeaveApplication({ application }) {
+  console.log(application);
   const [approveLoading, setApproveLoading] = useState(false);
   const [disApproveLoading, setDisApproveLoading] = useState(false);
   const api = useAxios();
@@ -15,7 +16,7 @@ function SingleLeaveApplication({ application }) {
   const handleApprove = async (e) => {
     e.preventDefault();
     setApproveLoading(true);
-    await dispatch(approveApplication({ api, applicationId: application._id }));
+    await dispatch(approveApplication({ api, applicationId: application.id }));
     setApproveLoading(false);
   };
   const handleDisapprove = async (e) => {
