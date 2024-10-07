@@ -8,6 +8,7 @@ import ChechInButton from "../ChechInButton";
 import { fetchTodaysAttendance } from "../../features/todaysAttendance/todaysAttendanceSlice";
 import CheckOutButton from "../CheckOutButton";
 import { formatDate } from "../../utils/helperFunctions";
+import RequiredCheckIn from "../managerDashboardComponents/RequiredCheckIn";
 
 function UserDashboard() {
   const { user } = useAuthContext();
@@ -51,6 +52,7 @@ function UserDashboard() {
   return (
     <>
       <div className="container text-center">
+        <RequiredCheckIn />
         <div className="card bg-warning ms-auto me-auto mt-5 vstack gap-3">
           <h2>Welcome: {user.fullName}</h2>
 

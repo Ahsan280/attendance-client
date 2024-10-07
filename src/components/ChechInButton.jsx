@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import useAxios from "../utils/useAxios";
 import { checkInToday } from "../features/todaysAttendance/todaysAttendanceSlice";
 import Swal from "sweetalert2";
-function ChechInButton({ setHasCheckedIn }) {
+
+function CheckInButton({ setHasCheckedIn }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -15,13 +16,17 @@ function ChechInButton({ setHasCheckedIn }) {
 
     const getPosition = () => {
       return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true, // Request high accuracy
+          timeout: 10000, // Set a timeout (in milliseconds)
+          maximumAge: 0, // Do not use a cached position
+        });
       });
     };
 
     try {
       const position = await getPosition();
-      const latitude = position.coords.latitude; // Use directly from position
+      const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       const date = new Date().toISOString();
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -39,7 +44,7 @@ function ChechInButton({ setHasCheckedIn }) {
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: "Failed to get your location. Please allow to get your location in the permissions settings",
+        text: "Failed to get your location. Please allow location permissions in the settings.",
         icon: "error",
       });
       setLoading(false);
@@ -48,11 +53,12 @@ function ChechInButton({ setHasCheckedIn }) {
 
     setLoading(false);
   };
+
   return (
     <>
       {loading ? (
         <button className="btn btn-info" disabled>
-          Check In
+          Checking In...
         </button>
       ) : (
         <button className="btn btn-info" onClick={handleCheckIn}>
@@ -63,4 +69,4 @@ function ChechInButton({ setHasCheckedIn }) {
   );
 }
 
-export default ChechInButton;
+export default CheckInButton;

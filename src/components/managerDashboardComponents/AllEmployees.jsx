@@ -3,14 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchEmployees } from "../../features/employee/employeeSlice";
 import useAxios from "../../utils/useAxios";
 import { formatDate } from "../../utils/helperFunctions";
-
+// import MapComponent from "./MapComponent";
 import EmployeeTable from "../EmployeeTable";
 import AddEmployeeModal from "../AddEmployeeModal";
+import MapComponent from "../MapComponent";
 
 function AllEmployees() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees.employees);
   const [attendances, setAttendances] = useState({});
+  const [officeLocation, setOfficeLocation] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
   const api = useAxios();
 
   useEffect(() => {
@@ -29,6 +32,14 @@ function AllEmployees() {
     };
     fetchAttendanceData();
     fetchEmployeeData();
+  }, []);
+  useEffect(() => {
+    const fetchOfficeLocation = async () => {
+      const response = await api.get("v1/office/get-office-location");
+
+      setOfficeLocation(response.data.officeLocation);
+    };
+    fetchOfficeLocation();
   }, []);
   const getAttendanceDetails = (employeeId) => {
     const attendance = attendances[employeeId];
@@ -71,6 +82,25 @@ function AllEmployees() {
           getAttendanceDetails={getAttendanceDetails}
         />
       </div>
+      {officeLocation && (
+        <div className="container">
+          <h2 className="text-center">Office Location:</h2>
+          <MapComponent
+            officeLocation={officeLocation}
+            isEditable={isEditable}
+            setIsEditable={setIsEditable}
+          />
+
+          <button
+            className="btn btn-info"
+            onClick={() => {
+              setIsEditable(true);
+            }}
+          >
+            Change Location
+          </button>
+        </div>
+      )}
     </div>
   );
 }
