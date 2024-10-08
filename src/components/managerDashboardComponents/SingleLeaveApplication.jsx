@@ -23,7 +23,7 @@ function SingleLeaveApplication({ application }) {
     e.preventDefault();
     setDisApproveLoading(true);
     await dispatch(
-      disapproveApplication({ api, applicationId: application._id })
+      disapproveApplication({ api, applicationId: application.id })
     );
     setDisApproveLoading(false);
   };
@@ -32,7 +32,7 @@ function SingleLeaveApplication({ application }) {
       <div className="card">
         <div className="card-body">
           <h5>Applicant:</h5>
-          <p>{application.applicant.fullName}</p>
+          <p>{application.applicantUser.fullName}</p>
           <h5>Reason:</h5>
           <p className="card-text">{application.reason}</p>
           <p>From: {formatDate(application.fromDate).slice(0, 10)}</p>
